@@ -3,12 +3,7 @@
     <my-dialog v-model:show="modalShow">Warning! Too much to do!</my-dialog>
     <div class="flex xl:container mx-auto flex-col pb-10">
       <note-form class="form border-lime-500" @add-note="add" />
-      <note-list
-        :notes="notes"
-        :disabled="formDisabled"
-        @remove="removeNote"
-        @check="toggleCheck"
-      />
+      <note-list :notes="notes" @remove="removeNote" @check="toggleCheck" />
     </div>
   </div>
 </template>
@@ -47,6 +42,9 @@ export default {
   },
 
   methods: {
+    mlog(id) {
+      console.log("app id", id);
+    },
     add(note) {
       if (note.text && this.notes.length < this.maxNotes) {
         this.notes = [...this.notes, note];
@@ -56,18 +54,17 @@ export default {
         this.modalShow = true;
       }
     },
-    removeNote(note) {
-      this.notes = this.notes.filter(({ id }) => id !== note.id);
+    removeNote(uniqId) {
+      this.notes = this.notes.filter(({ id }) => id !== uniqId);
     },
-    toggleCheck({ id }) {
-      const note = this.notes.find((el) => el.id === id);
+    toggleCheck(uniqId) {
+      const note = this.notes.find((el) => el.id === uniqId);
       note.completed = !note.completed;
     },
   },
   watch: {
     notes: {
       handler() {
-        console.log("check", this.notes);
         localStorage.setItem("notes-list", JSON.stringify(this.notes));
       },
       deep: true,

@@ -5,11 +5,11 @@
         <note-item
           v-for="note in notes"
           :key="note.id"
-          :note="note"
-          :notes="notes"
-          :disabled="disabled"
-          @remove="$emit('remove', note)"
-          @check="$emit('check', note)"
+          :text="note.text"
+          :completed="note.completed"
+          :id="note.id"
+          @remove="$emit('remove', note.id)"
+          @check="$emit('check', note.id)"
         />
       </transition-group>
     </div>
