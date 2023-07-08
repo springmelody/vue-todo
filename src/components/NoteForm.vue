@@ -7,7 +7,6 @@
   </form>
 </template>
 <script>
-import uniqueId from "lodash/uniqueId";
 export default {
   name: "NoteForm",
   data() {
@@ -20,7 +19,7 @@ export default {
   methods: {
     add() {
       const currentNote = {
-        id: uniqueId(),
+        id: crypto.randomUUID(),
         text: this.note.text,
         completed: false,
       };
