@@ -65,8 +65,12 @@ export default {
     },
   },
   watch: {
-    notes() {
-      localStorage.setItem("notes-list", JSON.stringify(this.notes));
+    notes: {
+      handler() {
+        console.log("check", this.notes);
+        localStorage.setItem("notes-list", JSON.stringify(this.notes));
+      },
+      deep: true,
     },
   },
 };

@@ -11,6 +11,7 @@
         @click="$emit('check', note)"
         v-model="completed"
         type="checkbox"
+        :checked="note.completed"
       />
     </div>
   </div>
